@@ -9,6 +9,15 @@
 </template>
 
 <script>
+import axios from 'axios';
+
+const url = 'http://localhost:3000/search';
+const wsConfig = {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+};
+
 export default {
   name: 'ItemResearch',
   data() {
@@ -20,6 +29,14 @@ export default {
   methods: {
     performSearch() {
       console.log(`Hello, ${this.searchText}!`);
+      const service = `${url}?searchtoken=${this.searchText}`;
+      axios.get(service, wsConfig)
+        .then((response) => {
+          console.log(response.data.haicercato);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };

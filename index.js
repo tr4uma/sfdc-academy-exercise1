@@ -7,29 +7,28 @@ var serveStatic = require('serve-static');
 const app = express()
 const _ = require('lodash')
 
-/*db
-  .authenticate()
-  .then(() => {
-  console.log('Connection has been established successfully.');
-  CoinMarketData.sync({force: true})
-  })
-  .catch(err => {
-  console.error('Unable to connect to the database:', err);
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+app.get('/search', (request, response) => {
+  const queryString = request.query.searchtoken;
+
+  response.json({
+    haicercato: queryString,
   });
-*/
-// app.get('/', (request, response) => {
-
-//   response.json({
-//     festa: 'TUTTO TOP'
-//   })
-// })
-
-// app.use((err, request, response, next) => {
-//   // log the error, for now just console.log
-//   console.log(err)
-//   response.status(500).send('Something broke!')
-//   next()
-// })
+})
 
 app.use(serveStatic(__dirname + '/dist'))
+
+app.use((err, request, response, next) => {
+  // log the error, for now just console.log
+  console.log(err)
+  response.status(500).send('Something broke!')
+  next()
+})
+
 app.listen(process.env.PORT || 3000)
+
