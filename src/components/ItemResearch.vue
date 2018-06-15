@@ -12,7 +12,9 @@
 <script>
 import axios from 'axios';
 
-const url = 'http://localhost:3000/search';
+// Change this if you want to try locally to http://localhost:3000/search
+const url = 'http://dd-academy-test.herokuapp.com/search';
+
 const wsConfig = {
   headers: {
     'Content-Type': 'application/json',
@@ -23,7 +25,7 @@ export default {
   name: 'ItemResearch',
   data() {
     return {
-      searchResults: ['ugo', 'pippo'],
+      searchResults: [],
       searchText: '',
       errorMessage: '',
     };
