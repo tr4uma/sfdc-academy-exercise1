@@ -1,5 +1,6 @@
 <template>
   <div class="research">
+    <div style="color: red;">{{errorMessage}}</div>
     <input type="text" v-model="searchText" placeholder="codice qui"/>
     <button @click="performSearch">SEARCH</button>
     <div v-for="res in searchResults" :key="res.value">
@@ -24,10 +25,12 @@ export default {
     return {
       searchResults: ['ugo', 'pippo'],
       searchText: '',
+      errorMessage: '',
     };
   },
   methods: {
     performSearch() {
+      this.errorMessage = '';
       console.log(`Hello, ${this.searchText}!`);
       const service = `${url}?searchtoken=${this.searchText}`;
       axios.get(service, wsConfig)
@@ -36,6 +39,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+          this.errorMessage = 'Errore nella connessione al Server';
         });
     },
   },
