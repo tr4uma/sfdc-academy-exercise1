@@ -3,8 +3,23 @@
     <div style="color: red;">{{errorMessage}}</div>
     <input type="text" v-model="searchText" placeholder="codice qui"/>
     <button @click="performSearch">SEARCH</button>
-    <div v-for="res in searchResults" :key="res.value">
-      {{res}}
+    <div class="tablecontainer">
+      <table>
+        <thead>
+          <tr>
+            <th>Case ID</th>
+            <th>Case Subject</th>
+            <th>Case Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="res in searchResults" :key="res.id">
+            <td>{{res.id}}</td>
+            <td>{{res.subject}}</td>
+            <td>{{res.description}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -13,8 +28,8 @@
 import axios from 'axios';
 
 // Change this if you want to try locally to http://localhost:3000/search
-const url = 'http://dd-academy-test.herokuapp.com/search';
-// const url = 'http://localhost:3000/search';
+// const url = 'http://dd-academy-test.herokuapp.com/search';
+const url = 'http://localhost:3000/search';
 
 const wsConfig = {
   headers: {
@@ -38,7 +53,7 @@ export default {
       const service = `${url}?searchtoken=${this.searchText}`;
       axios.get(service, wsConfig)
         .then((response) => {
-          console.log(response.data);
+          this.searchResults = response.data.risultati;
         })
         .catch((error) => {
           console.log(error);
@@ -64,5 +79,12 @@ li {
 }
 a {
   color: #42b983;
+}
+table {
+  width: 50%;
+}
+.tablecontainer {
+  padding-left: 25%;
+  width: 100%;
 }
 </style>
