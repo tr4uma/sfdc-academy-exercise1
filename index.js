@@ -3,8 +3,8 @@ var path = require('path');
 var serveStatic = require('serve-static');
 const cls = require('continuation-local-storage');
 const Sequelize = require('sequelize');
-const database_url = 'postgres://cqxhzlyqirpzta:7fc911990843d7cfcd5e80bd43f3d2f2a5b027f2bfb5815bba4e6569e67c873f@ec2-54-247-100-44.eu-west-1.compute.amazonaws.com:5432/d7t4ipaploosk6';
-const db = new Sequelize(database_url, {
+//const database_url = 'postgres://cqxhzlyqirpzta:7fc911990843d7cfcd5e80bd43f3d2f2a5b027f2bfb5815bba4e6569e67c873f@ec2-54-247-100-44.eu-west-1.compute.amazonaws.com:5432/d7t4ipaploosk6';
+const db = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
   dialectOptions: {
     ssl: true,
