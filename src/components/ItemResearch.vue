@@ -10,6 +10,7 @@
             <th>Case ID</th>
             <th>Case Subject</th>
             <th>Case Description</th>
+            <th>Case Priority</th>
           </tr>
         </thead>
         <tbody>
@@ -17,6 +18,7 @@
             <td>{{res.id}}</td>
             <td>{{res.subject}}</td>
             <td>{{res.description}}</td>
+            <td>{{res.priority}}</td>
           </tr>
         </tbody>
       </table>

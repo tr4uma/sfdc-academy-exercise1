@@ -37,7 +37,7 @@ app.get('/search', (request, response) => {
 handleQuery = async function(queryToken, response) {
 
   let res = Case.findAll({
-    attributes: ['id','subject','description'],
+    attributes: ['id','subject','description','priority'],
     where: {
       subject: {
         [Op.iLike]: `%${queryToken}%`,
