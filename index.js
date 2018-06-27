@@ -29,7 +29,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('/search', (request, response) => {
-  const queryString = (request.query.searchtoken || '').replace(/[\\$'"]/g, "\\$&");
+  const queryString = ((request.query && request.query.searchtoken) || '').replace(/[\\$'"]/g, "\\$&");
   handleQuery(request.query.searchtoken, response);
 
 })
