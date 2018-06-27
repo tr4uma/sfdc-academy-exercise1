@@ -30,7 +30,7 @@ app.use(function(req, res, next) {
 
 app.get('/search', (request, response) => {
   let tk = '';
-  if(request.query && request.query.searchtoken){
+  if(request.query !== undefined && request.query.searchtoken !== undefined){
     tk = request.query.searchtoken;
   }
   const queryString = tk.replace(/[\\$'"]/g, "\\$&");
